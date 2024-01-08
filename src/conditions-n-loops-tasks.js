@@ -62,8 +62,11 @@ function getMaxNumber(a, b, c) {
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  * {x: 1, y: 1}, {x: 2, y: 8} => false
  */
-function canQueenCaptureKing(/* queen, king */) {
-  throw new Error('Not implemented');
+function canQueenCaptureKing(queen, king) {
+  if (queen.x === king.x || queen.y === king.y) return true;
+  if (queen.x === queen.y && king.x === king.y) return true;
+  if (queen.x + queen.y === king.x + king.y) return true;
+  return false;
 }
 
 /**
@@ -123,8 +126,31 @@ function convertToRomanNumerals(/* num */) {
  *  '10,5'    => 'one zero point five'
  *  '1950.2'  => 'one nine five zero point two'
  */
-function convertNumberToString(/* numberStr */) {
-  throw new Error('Not implemented');
+function convertNumberToString(nStr) {
+  const oConvert = {
+    0: 'zero',
+    1: 'one',
+    2: 'two',
+    3: 'three',
+    4: 'four',
+    5: 'five',
+    6: 'six',
+    7: 'seven',
+    8: 'eight',
+    9: 'nine',
+    '-': 'minus',
+    '.': 'point',
+    ',': 'point',
+  };
+
+  let sResult = '';
+
+  for (let i = 0; i < nStr.length - 1; i += 1) {
+    sResult += `${oConvert[nStr[i]]} `;
+  }
+  sResult += oConvert[nStr[nStr.length - 1]];
+
+  return sResult;
 }
 
 /**
@@ -157,8 +183,15 @@ function isPalindrome(/* str */) {
  *  'qwerty', 'Q'     => -1
  *  'qwerty', 'p'     => -1
  */
-function getIndexOf(/* str, letter */) {
-  throw new Error('Not implemented');
+function getIndexOf(str, letter) {
+  let p = -1;
+  for (let i = 0; i < str.length; i += 1) {
+    if (str[i] === letter) {
+      p = i;
+      break;
+    }
+  }
+  return p;
 }
 
 /**
