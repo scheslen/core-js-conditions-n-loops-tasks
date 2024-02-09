@@ -421,32 +421,24 @@ function sortByAsc(arr) {
  *  '012345', 3 => '024135' => '043215' => '031425'
  *  'qwerty', 3 => 'qetwry' => 'qtrewy' => 'qrwtey'
  */
+
 function shuffleChar(str, iterations) {
   let sStr = str;
-  let sRes = '';
-  const as0 = [];
-  as0.length = str.length;
-  let i1 = 0;
-  let i2 = 0;
-  const ls2 = Math.floor(str.length / 2);
+  let s1 = '';
+  let s2 = '';
 
   for (let k = 0; k < iterations; k += 1) {
-    i1 = 0;
-    i2 = ls2;
+    s1 = '';
+    s2 = '';
     for (let i = 0; i < str.length; i += 1) {
-      if (i % 2 === 0) {
-        as0[i1] = sStr[i];
-        i1 += 1;
-      } else {
-        as0[i2] = sStr[i];
-        i2 += 1;
-      }
+      if (i % 2 === 0) s1 += sStr[i];
+      else s2 += sStr[i];
     }
-    sRes = '';
-    for (let i = 0; i < str.length; i += 1) sRes += as0[i];
-    sStr = sRes;
+
+    sStr = s1 + s2;
   }
-  return sRes;
+
+  return sStr;
 }
 
 /**
@@ -466,8 +458,66 @@ function shuffleChar(str, iterations) {
  * @param {number} number The source number
  * @returns {number} The nearest larger number, or original number if none exists.
  */
-function getNearestBigger(/* number */) {
-  throw new Error('Not implemented');
+// function getNearestBigger(number) {
+//   const aNumber = number.toString().split('');
+//   let N = -1;
+//   let M = -1;
+//   let J = -1;
+
+//   for (let i = aNumber.length - 1; i > 0; i -= 1) {
+//     // N = aNumber[i];
+//     // for (let j = i; j >= 0; j -= 1)
+//       if ( aNumber[i] > aNumber[i-1]) {
+//         N = aNumber[i];
+//         M = aNumber[i-1];
+//         aNumber[j] = aNumber[i];
+//         aNumber[i] = M;
+//         J = j;
+//         break;
+//       }
+//     if (M > -1) break;
+//   }
+//   if (M < 0 || N < 0) return number;
+
+//   for (let i = J + 1; i < aNumber.length; i += 1)
+//     for (let j = i + 1; j < aNumber.length; j += 1)
+//       if (aNumber[i] > aNumber[j]) {
+//         M = aNumber[j];
+//         aNumber[j] = aNumber[i];
+//         aNumber[i] = M;
+//       }
+
+//   return Number(aNumber.join(''));
+// }
+
+function getNearestBigger(number) {
+  const aNumber = number.toString().split('');
+  let N = -1;
+  let M = -1;
+  let J = -1;
+
+  for (let i = aNumber.length - 1; i > 0; i -= 1) {
+    if (aNumber[i] > aNumber[i - 1]) {
+      N = aNumber[i];
+      M = aNumber[i - 1];
+      aNumber[i - 1] = aNumber[i];
+      aNumber[i] = M;
+      J = i - 1;
+      break;
+    }
+    if (M > -1) break;
+  }
+  if (M < 0 || N < 0) return number;
+
+  for (let i = J + 1; i < aNumber.length; i += 1)
+    for (let j = i + 1; j < aNumber.length; j += 1)
+      if (aNumber[i] > aNumber[j]) {
+        M = aNumber[j];
+        aNumber[j] = aNumber[i];
+        aNumber[i] = M;
+      }
+
+  return Number(aNumber.join(''));
 }
 
 module.exports = {
