@@ -357,7 +357,14 @@ function rotateMatrix(matrix) {
     }
   }
 
-  return aRes;
+  const aRes0 = matrix;
+  for (let i = 0; i < matrix.length; i += 1) {
+    for (let j = 0; j < matrix.length; j += 1) {
+      aRes0[i][j] = aRes[i][j];
+    }
+  }
+
+  return aRes0;
 }
 
 /**
